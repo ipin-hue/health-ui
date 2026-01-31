@@ -1,0 +1,862 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nutrimate - Kuesioner Balita</title>
+  <style>
+    :root{
+      --bg:#f3f1ff;
+      --card:#ffffff;
+      --ink:#1f1f1f;
+      --muted:#6b6b6b;
+      --purple:#6a35c8;
+      --purple-2:#8c63dd;
+      --stroke:#e7e3ff;
+      --shadow: 0 10px 30px rgba(32, 0, 88, .08);
+      --radius: 22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: radial-gradient(1100px 700px at 20% -10%, rgba(106,53,200,.12), transparent 55%),
+                  radial-gradient(900px 600px at 95% 10%, rgba(140,99,221,.10), transparent 55%),
+                  var(--bg);
+      color:var(--ink);
+    }
+    .app{
+      max-width: 430px;
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 18px 14px 90px;
+      position: relative;
+    }
+    .topbar{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 6px 2px 10px;
+    }
+    .back{
+      width: 40px; height: 40px;
+      border-radius: 14px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.65);
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer;
+    }
+    .title{
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--purple);
+      letter-spacing: .2px;
+      margin: 0;
+      line-height: 1.1;
+    }
+    .subtitle{
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .card{
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(231,227,255,.9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+    .sp12{height:12px}
+    .sp16{height:16px}
+    .sp20{height:20px}
+
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      padding: 14px 16px;
+    }
+    .logo{
+      width: 46px; height:46px;
+      border-radius: 18px;
+      background: linear-gradient(140deg, rgba(106,53,200,.25), rgba(140,99,221,.15));
+      display:flex; align-items:center; justify-content:center;
+      border:1px solid rgba(231,227,255,.9);
+    }
+    .brand h2{
+      margin:0;
+      font-size: 26px;
+      color: var(--purple);
+      line-height: 1.1;
+    }
+    .brand p{margin:3px 0 0; color: var(--muted); font-size: 13px}
+
+    .centerTitle{
+      text-align:center;
+      color: var(--purple);
+      font-weight: 900;
+      font-size: 30px;
+      margin: 6px 0 10px;
+    }
+    .centerText{
+      text-align:center;
+      color: #2b2b2b;
+      font-size: 16px;
+      line-height: 1.8;
+      margin: 0;
+    }
+    .emph{
+      color: var(--purple);
+      font-weight: 800;
+    }
+
+    .pillHeader{
+      text-align:center;
+      background: rgba(255,255,255,.92);
+      border:1px solid rgba(231,227,255,.9);
+      border-radius: 22px;
+      padding: 16px 14px;
+      box-shadow: var(--shadow);
+    }
+    .pillHeader .big{
+      font-size: 40px;
+      font-weight: 900;
+      color: var(--purple);
+      margin:0;
+      letter-spacing:.2px;
+    }
+
+    .formCard{padding: 18px}
+    .field{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      border: 1px solid #e9e6f6;
+      background: #fbfbff;
+      padding: 12px 14px;
+      border-radius: 18px;
+      margin: 10px 0;
+    }
+    .ico{
+      width: 34px; height: 34px;
+      border-radius: 14px;
+      background: rgba(106,53,200,.10);
+      display:flex; align-items:center; justify-content:center;
+      color: var(--purple);
+      font-weight: 900;
+      flex:0 0 auto;
+    }
+    .field input, .field select{
+      width: 100%;
+      border:0;
+      outline:none;
+      background: transparent;
+      font-size: 16px;
+      color: #2b2b2b;
+    }
+    .field input::placeholder{color:#9a9a9a}
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btnRow{
+      display:flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .btn{
+      width:100%;
+      border:0;
+      border-radius: 18px;
+      padding: 14px 14px;
+      font-weight: 800;
+      cursor:pointer;
+      font-size: 15px;
+    }
+    .btnPrimary{
+      background: linear-gradient(135deg, var(--purple), var(--purple-2));
+      color:white;
+      box-shadow: 0 10px 25px rgba(106,53,200,.25);
+    }
+    .btnGhost{
+      background: rgba(106,53,200,.08);
+      color: var(--purple);
+      border: 1px solid rgba(106,53,200,.15);
+    }
+
+    .sectionTitle{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin: 0 0 6px;
+      color: var(--purple);
+      font-weight: 900;
+      font-size: 22px;
+    }
+    .hint{
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+      margin: 0 0 8px;
+    }
+
+    .qCard{
+      padding: 14px;
+    }
+    .question{
+      background: #f7f5ff;
+      border: 1px solid rgba(106,53,200,.12);
+      border-radius: 18px;
+      padding: 14px;
+      font-weight: 800;
+      color: #2b2b2b;
+    }
+    .opt{
+      border: 1px solid #e9e6f6;
+      border-radius: 18px;
+      padding: 12px 14px;
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+      margin-top: 10px;
+      background: #fff;
+      cursor:pointer;
+      user-select:none;
+    }
+    .opt input{margin-top:4px}
+    .opt.selected{
+      border-color: rgba(106,53,200,.55);
+      box-shadow: 0 10px 25px rgba(106,53,200,.10);
+      background: rgba(106,53,200,.05);
+    }
+    .opt .label{line-height:1.4}
+    .toast{
+      margin-top: 12px;
+      border-radius: 18px;
+      padding: 12px 14px;
+      border: 1px solid rgba(38, 168, 90, .25);
+      background: rgba(38, 168, 90, .10);
+      color: #1d6a3c;
+      font-weight: 700;
+      font-size: 13px;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+    }
+
+    .resultHeader{
+      margin-top: 8px;
+      text-align:center;
+      font-size: 28px;
+      font-weight: 900;
+      color: #ffffff;
+      position: relative;
+      padding: 18px 14px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(40, 176, 98,.85), rgba(106,53,200,.25));
+      border: 1px solid rgba(255,255,255,.25);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .resultHeader small{
+      display:block;
+      opacity:.9;
+      font-weight:700;
+      margin-top: 4px;
+      font-size: 13px;
+    }
+    .resultCard{
+      border-radius: 22px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(231,227,255,.9);
+      background: rgba(255,255,255,.92);
+    }
+    .badge{
+      display:inline-block;
+      padding: 10px 14px;
+      border-radius: 16px;
+      font-weight: 900;
+      color: white;
+      background: rgba(40, 176, 98, .88);
+      margin-top: 8px;
+    }
+    .badge.warn{background: rgba(244, 150, 30, .92)}
+    .badge.bad{background: rgba(230, 70, 70, .92)}
+
+    .grid3{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .stat{
+      border-radius: 18px;
+      padding: 12px;
+      background: rgba(106,53,200,.06);
+      border: 1px solid rgba(106,53,200,.12);
+      text-align:center;
+    }
+    .stat .n{
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--purple);
+      line-height: 1.1;
+    }
+    .stat .t{
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .chartWrap{
+      border-radius: 22px;
+      padding: 14px;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(231,227,255,.9);
+      box-shadow: var(--shadow);
+    }
+    canvas{width:100%; height:220px; display:block}
+
+    .tabbar{
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 14px;
+      width: min(430px, calc(100% - 28px));
+      display:flex;
+      gap: 12px;
+      justify-content: space-between;
+      padding: 10px;
+      background: rgba(255,255,255,.75);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(231,227,255,.9);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+    }
+    .tab{
+      width: 100%;
+      border-radius: 20px;
+      padding: 12px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      cursor:pointer;
+      border: 1px solid transparent;
+      font-weight: 900;
+      color: #2b2b2b;
+    }
+    .tab.active{
+      background: rgba(106,53,200,.10);
+      border-color: rgba(106,53,200,.18);
+      color: var(--purple);
+    }
+
+    .screen{display:none}
+    .screen.active{display:block}
+
+    .note{
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- SCREEN: WELCOME -->
+    <section id="scr_welcome" class="screen active">
+      <div class="card brand">
+        <div class="logo" aria-hidden="true">
+          <!-- simple inline "baby" icon -->
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+            <path d="M12 3c4.4 0 8 3.6 8 8s-3.6 8-8 8-8-3.6-8-8 3.6-8 8-8Z" stroke="rgba(106,53,200,.85)" stroke-width="2"/>
+            <path d="M9 11.2c.6 0 1-.5 1-1.1S9.6 9 9 9s-1 .5-1 1.1.4 1.1 1 1.1Zm6 0c.6 0 1-.5 1-1.1S15.6 9 15 9s-1 .5-1 1.1.4 1.1 1 1.1Z" fill="rgba(106,53,200,.85)"/>
+            <path d="M9 14.5c.8 1.2 2 1.8 3 1.8s2.2-.6 3-1.8" stroke="rgba(106,53,200,.85)" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <h2>Nutrimate</h2>
+          <p>Pantau pertumbuhan balita</p>
+        </div>
+      </div>
+
+      <div class="sp16"></div>
+
+      <div class="card">
+        <div class="centerTitle">Selamat datang di Nutrimate!</div>
+        <p class="centerText">
+          Aplikasi pendamping orang tua untuk memantau tumbuh kembang balita dan mencegah risiko gizi buruk serta stunting sejak dini.
+          <br/><br/>
+          Kami hadir dengan fitur analisis gizi, riwayat pemeriksaan, dan tips kesehatan untuk membantu memastikan anak tumbuh optimal.
+          <br/><br/>
+          <span class="emph">💪 Ayo, mulai langkah kecil hari ini demi masa depan yang lebih sehat!</span>
+        </p>
+        <div class="sp16"></div>
+        <button class="btn btnPrimary" onclick="go('scr_data')">Mulai</button>
+        <div class="note">
+          Catatan: hasil ini bersifat <b>skrining</b>, bukan diagnosis. Untuk keluhan serius, tetap konsultasi tenaga kesehatan.
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN: INPUT DATA -->
+    <section id="scr_data" class="screen">
+      <div class="topbar">
+        <button class="back" onclick="back()" aria-label="Kembali">←</button>
+        <div>
+          <h1 class="title">Masukkan Data Balita</h1>
+          <p class="subtitle">Isi data dasar untuk perhitungan dan ringkasan hasil.</p>
+        </div>
+      </div>
+
+      <div class="pillHeader">
+        <p class="big">Data Diri Balita</p>
+      </div>
+
+      <div class="sp16"></div>
+
+      <div class="card formCard">
+        <div class="field">
+          <div class="ico">🙂</div>
+          <input id="namaBalita" placeholder="Nama Balita (opsional)" />
+        </div>
+
+        <div class="field">
+          <div class="ico">📅</div>
+          <input id="tglPeriksa" type="date" />
+        </div>
+
+        <div class="field">
+          <div class="ico">👥</div>
+          <select id="jk">
+            <option value="">Jenis Kelamin</option>
+            <option value="L">Laki-laki</option>
+            <option value="P">Perempuan</option>
+          </select>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <div class="ico">🎂</div>
+            <input id="tglLahir" type="date" />
+          </div>
+          <div class="field">
+            <div class="ico">⏱</div>
+            <input id="usiaBulan" placeholder="Usia (bulan)" inputmode="numeric" />
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="ico">⚖️</div>
+          <input id="bb" placeholder="Berat Balita (kg)" inputmode="decimal" />
+        </div>
+
+        <div class="field">
+          <div class="ico">↕️</div>
+          <input id="tb" placeholder="Tinggi Balita (cm)" inputmode="decimal" />
+        </div>
+
+        <div class="field">
+          <div class="ico">👪</div>
+          <input id="namaOrtu" placeholder="Nama Orangtua Balita (opsional)" />
+        </div>
+
+        <div class="btnRow">
+          <button class="btn btnGhost" onclick="fillAgeFromDob()">Hitung Usia</button>
+          <button class="btn btnPrimary" onclick="go('scr_guide')">Lanjut</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN: GUIDE -->
+    <section id="scr_guide" class="screen">
+      <div class="topbar">
+        <button class="back" onclick="back()" aria-label="Kembali">←</button>
+        <div>
+          <h1 class="title">Petunjuk Pengisian</h1>
+          <p class="subtitle">Agar hasil lebih konsisten, jawab sesuai kondisi saat ini.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="sectionTitle">📌 Ringkas</div>
+        <p class="hint">
+          • Jawab berdasarkan kondisi terakhir anak (bukan perkiraan lama).<br/>
+          • Jika ragu, pilih jawaban yang paling mendekati.<br/>
+          • Hasil adalah skrining: “perlu perhatian” ≠ diagnosis.
+        </p>
+
+        <div class="sp12"></div>
+        <button class="btn btnPrimary" onclick="go('scr_quiz')">Mulai Kuisioner</button>
+      </div>
+    </section>
+
+    <!-- SCREEN: QUIZ -->
+    <section id="scr_quiz" class="screen">
+      <div class="topbar">
+        <button class="back" onclick="back()" aria-label="Kembali">←</button>
+        <div>
+          <h1 class="title">Kuisioner</h1>
+          <p class="subtitle">Contoh 1 pertanyaan. Nanti kamu bisa tambah daftar pertanyaan.</p>
+        </div>
+      </div>
+
+      <div class="card qCard">
+        <div class="sectionTitle">🧩 Contoh Pertanyaan</div>
+
+        <div class="question" id="qText">
+          Apakah anak menderita batuk dan/atau sukar bernapas?
+        </div>
+
+        <label class="opt" data-score="0">
+          <input type="radio" name="q1" />
+          <div class="label">Tidak sama sekali</div>
+        </label>
+
+        <label class="opt" data-score="1">
+          <input type="radio" name="q1" />
+          <div class="label">Ya, namun tetap bernapas normal</div>
+        </label>
+
+        <label class="opt" data-score="2">
+          <input type="radio" name="q1" />
+          <div class="label">Ya, dan napas tampak lebih cepat</div>
+        </label>
+
+        <label class="opt" data-score="3">
+          <input type="radio" name="q1" />
+          <div class="label">Ya. Bernapas terlihat berat, dada bagian bawah tertarik ke dalam saat menarik napas</div>
+        </label>
+
+        <div class="toast" id="pickedToast" style="display:none">
+          ✅ <span id="pickedText"></span>
+        </div>
+
+        <div class="btnRow">
+          <button class="btn btnGhost" onclick="resetQuiz()">Reset</button>
+          <button class="btn btnPrimary" onclick="goResult()">Lihat Hasil</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN: RESULT -->
+    <section id="scr_result" class="screen">
+      <div class="topbar">
+        <button class="back" onclick="back()" aria-label="Kembali">←</button>
+        <div>
+          <h1 class="title">Hasil Kuisioner</h1>
+          <p class="subtitle">Ringkasan status dan rekomendasi awal.</p>
+        </div>
+      </div>
+
+      <div class="resultHeader" id="resultHeader">
+        Status Gizi berdasarkan Z-Score
+        <small id="smallHeader">—</small>
+      </div>
+
+      <div class="sp16"></div>
+
+      <div class="resultCard">
+        <div class="sectionTitle">Status Gizi berdasarkan Z-Score</div>
+        <div id="badgeZ" class="badge">Gizi Normal</div>
+        <div class="sp12"></div>
+
+        <div class="sectionTitle">Hasil Evaluasi Risiko</div>
+        <div id="badgeRisk" class="badge warn">Risiko Rendah–Sedang</div>
+
+        <div class="sp16"></div>
+
+        <div class="sectionTitle">Interpretasi Hasil</div>
+        <p class="hint" id="interpretasi">
+          Beberapa kondisi perlu diperhatikan meski tidak ada gejala serius.
+        </p>
+
+        <div class="sectionTitle">Rekomendasi</div>
+        <p class="hint" id="rekomendasi">
+          Perhatikan pola makan dan kesehatan anak. Konsultasi rutin dengan tenaga kesehatan.
+        </p>
+
+        <div class="sp12"></div>
+        <div class="sectionTitle">Ringkasan Kuisioner</div>
+        <div class="grid3">
+          <div class="stat">
+            <div class="n" id="nTotal">1</div>
+            <div class="t">Total</div>
+          </div>
+          <div class="stat">
+            <div class="n" id="nWarn">1</div>
+            <div class="t">Peringatan</div>
+          </div>
+          <div class="stat">
+            <div class="n" id="nDanger">0</div>
+            <div class="t">Bahaya</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sp16"></div>
+
+      <div class="chartWrap">
+        <div class="sectionTitle">Kurva Z-Score (WHO)</div>
+        <p class="hint">Menunjukkan posisi status gizi anak berdasarkan nilai z-score.</p>
+        <canvas id="zChart" width="400" height="220"></canvas>
+        <div class="sp12"></div>
+        <div class="hint" id="zLine">Z-score: -1.33 → Status: Kurang</div>
+      </div>
+
+      <div class="note">
+        Catatan: tampilannya meniru alur aplikasi mobile. Untuk produksi, bagian z-score WHO sebaiknya pakai dataset & aturan yang jelas agar tidak misleading.
+      </div>
+    </section>
+
+    <!-- Bottom nav (optional) -->
+    <nav class="tabbar">
+      <div class="tab active" id="tabHome" onclick="go('scr_welcome')">🔎 Home</div>
+      <div class="tab" id="tabData" onclick="go('scr_data')">🧾 Data</div>
+      <div class="tab" id="tabResult" onclick="go('scr_result')">📊 Hasil</div>
+    </nav>
+  </div>
+
+  <script>
+    // --- simple navigation stack ---
+    const stack = ["scr_welcome"];
+    function setActiveTab(screenId){
+      const tHome = document.getElementById("tabHome");
+      const tData = document.getElementById("tabData");
+      const tRes  = document.getElementById("tabResult");
+      [tHome,tData,tRes].forEach(x=>x.classList.remove("active"));
+      if(screenId==="scr_welcome") tHome.classList.add("active");
+      else if(screenId==="scr_data" || screenId==="scr_guide" || screenId==="scr_quiz") tData.classList.add("active");
+      else if(screenId==="scr_result") tRes.classList.add("active");
+    }
+    function go(id){
+      document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+      if(stack[stack.length-1] !== id) stack.push(id);
+      setActiveTab(id);
+      if(id === "scr_result") drawZChart(currentZ);
+    }
+    function back(){
+      if(stack.length>1) stack.pop();
+      const prev = stack[stack.length-1];
+      document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+      document.getElementById(prev).classList.add("active");
+      setActiveTab(prev);
+    }
+
+    // --- quiz UI selection ---
+    const opts = Array.from(document.querySelectorAll(".opt"));
+    let qScore = null; // 0..3
+    opts.forEach(opt=>{
+      opt.addEventListener("click", ()=>{
+        opts.forEach(o=>o.classList.remove("selected"));
+        opt.classList.add("selected");
+        opt.querySelector("input").checked = true;
+        qScore = Number(opt.dataset.score);
+
+        const txt = opt.querySelector(".label").textContent.trim();
+        const toast = document.getElementById("pickedToast");
+        document.getElementById("pickedText").textContent = `Contoh jawaban dipilih: "${txt}"`;
+        toast.style.display = "flex";
+      });
+    });
+    function resetQuiz(){
+      opts.forEach(o=>o.classList.remove("selected"));
+      document.querySelectorAll('input[name="q1"]').forEach(r=>r.checked=false);
+      qScore = null;
+      document.getElementById("pickedToast").style.display = "none";
+    }
+
+    // --- age helper ---
+    function fillAgeFromDob(){
+      const dob = document.getElementById("tglLahir").value;
+      const periksa = document.getElementById("tglPeriksa").value || new Date().toISOString().slice(0,10);
+      if(!dob) return alert("Isi tanggal lahir dulu.");
+      const m = diffMonths(new Date(dob), new Date(periksa));
+      document.getElementById("usiaBulan").value = m;
+    }
+    function diffMonths(d1, d2){
+      let months = (d2.getFullYear()-d1.getFullYear())*12 + (d2.getMonth()-d1.getMonth());
+      if(d2.getDate() < d1.getDate()) months -= 1; // rough adjustment
+      return Math.max(0, months);
+    }
+
+    // --- z-score placeholder (UI demo only) ---
+    // NOTE: Replace this with real WHO calculation later.
+    let currentZ = -1.33;
+    function computeZPlaceholder(bb, tb, usia){
+      // A very rough placeholder so UI changes with input:
+      // smaller weight/height vs age tends to lower z.
+      // Do NOT treat as WHO logic.
+      const b = Number(bb)||0;
+      const t = Number(tb)||0;
+      const u = Number(usia)||0;
+      const base = (b*0.35 + t*0.03) - (u*0.12);
+      const z = (base - 5) / 2.4; // scale to approx -3..+3
+      return clamp(z, -3.0, 3.0);
+    }
+    function clamp(x, a, b){ return Math.max(a, Math.min(b, x)); }
+
+    function zStatus(z){
+      // Simplified buckets (replace with your chosen definition)
+      if(z < -2) return {label:"Kurang", tone:"warn"};
+      if(z <= 2) return {label:"Normal", tone:"ok"};
+      return {label:"Lebih", tone:"warn"};
+    }
+
+    function riskFromQuiz(score){
+      // 0: normal, 1-2: peringatan, 3: bahaya
+      if(score === null) return {risk:"Belum diisi", tone:"warn", warn:0, danger:0};
+      if(score >= 3) return {risk:"Risiko Tinggi", tone:"bad", warn:0, danger:1};
+      if(score >= 1) return {risk:"Risiko Rendah–Sedang", tone:"warn", warn:1, danger:0};
+      return {risk:"Risiko Rendah", tone:"ok", warn:0, danger:0};
+    }
+
+    function goResult(){
+      // basic validation (minimal)
+      const usia = document.getElementById("usiaBulan").value.trim();
+      const jk = document.getElementById("jk").value.trim();
+      const bb = document.getElementById("bb").value.trim();
+      const tb = document.getElementById("tb").value.trim();
+
+      if(!usia || !jk || !bb || !tb){
+        // Don't over-police: but missing values make "status gizi" meaningless
+        return alert("Minimal isi: Jenis kelamin, Usia (bulan), Berat (kg), Tinggi (cm).");
+      }
+      if(qScore === null){
+        return alert("Pilih salah satu jawaban kuisioner dulu.");
+      }
+
+      currentZ = computeZPlaceholder(bb, tb, usia);
+      renderResult(currentZ, qScore);
+      go("scr_result");
+    }
+
+    function renderResult(z, score){
+      const zS = zStatus(z);
+      const r  = riskFromQuiz(score);
+
+      // Z badge
+      const badgeZ = document.getElementById("badgeZ");
+      badgeZ.textContent = `Gizi ${zS.label}`;
+      badgeZ.className = "badge" + (zS.tone==="warn" ? " warn" : (zS.tone==="bad" ? " bad" : ""));
+
+      // Risk badge
+      const badgeRisk = document.getElementById("badgeRisk");
+      badgeRisk.textContent = r.risk;
+      badgeRisk.className = "badge" + (r.tone==="warn" ? " warn" : (r.tone==="bad" ? " bad" : ""));
+
+      // Header small text
+      document.getElementById("smallHeader").textContent = `Z-score: ${z.toFixed(2)} → Status: ${zS.label}`;
+
+      // Interpretation + recommendation (demo rules)
+      let interpret = "Tidak ada indikator kuat masalah serius dari jawaban kuisioner saat ini.";
+      let rekom = "Lanjutkan pemantauan rutin. Pastikan asupan gizi seimbang dan imunisasi sesuai jadwal.";
+      if(r.tone==="warn"){
+        interpret = "Ada beberapa indikator yang perlu dipantau lebih dekat meski belum tentu kondisi serius.";
+        rekom = "Pantau gejala 1–2 hari. Jika memburuk/berulang, konsultasi tenaga kesehatan.";
+      }
+      if(r.tone==="bad"){
+        interpret = "Ada indikator bahaya. Ini perlu perhatian lebih cepat.";
+        rekom = "Disarankan segera konsultasi tenaga kesehatan, terutama bila ada gejala berat.";
+      }
+      // Combine with z-score note
+      if(z < -2){
+        interpret += " Selain itu, nilai z-score rendah mengindikasikan kondisi 'kurang' menurut ambang sederhana.";
+        rekom += " Pertimbangkan evaluasi gizi dan pemantauan pertumbuhan berkala.";
+      }
+
+      document.getElementById("interpretasi").textContent = interpret;
+      document.getElementById("rekomendasi").textContent = rekom;
+
+      // Summary counts for demo (1 question)
+      document.getElementById("nTotal").textContent = "1";
+      document.getElementById("nWarn").textContent = String(r.warn);
+      document.getElementById("nDanger").textContent = String(r.danger);
+
+      // z line
+      document.getElementById("zLine").textContent = `Z-score: ${z.toFixed(2)} → Status: ${zS.label}`;
+    }
+
+    // --- draw simple WHO-like z band chart (visual only) ---
+    function drawZChart(z){
+      const c = document.getElementById("zChart");
+      const ctx = c.getContext("2d");
+      const W = c.width, H = c.height;
+
+      // clear
+      ctx.clearRect(0,0,W,H);
+
+      // layout
+      const padL=28, padR=18, padT=14, padB=40;
+      const x0=padL, y0=padT, w=W-padL-padR, h=H-padT-padB;
+
+      // bands: [-3,-2] red, [-2,-1] yellow, [-1,1] green, [1,2] yellow, [2,3] red
+      function zx(val){ return x0 + ((val+3)/6)*w; }
+
+      // background grid
+      ctx.strokeStyle = "rgba(60,60,60,.10)";
+      ctx.lineWidth = 1;
+      for(let i=0;i<=6;i++){
+        const x = x0 + (i/6)*w;
+        ctx.beginPath(); ctx.moveTo(x, y0); ctx.lineTo(x, y0+h); ctx.stroke();
+      }
+      for(let j=0;j<=4;j++){
+        const y = y0 + (j/4)*h;
+        ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x0+w, y); ctx.stroke();
+      }
+
+      // band helper
+      function band(a,b,fill){
+        ctx.fillStyle = fill;
+        ctx.fillRect(zx(a), y0+h-28, zx(b)-zx(a), 28);
+      }
+      band(-3,-2,"rgba(230,70,70,.30)");
+      band(-2,-1,"rgba(244,150,30,.28)");
+      band(-1, 1,"rgba(40,176,98,.25)");
+      band( 1, 2,"rgba(244,150,30,.28)");
+      band( 2, 3,"rgba(230,70,70,.30)");
+
+      // axes
+      ctx.strokeStyle = "rgba(40,40,40,.25)";
+      ctx.lineWidth = 1.2;
+      ctx.strokeRect(x0,y0,w,h);
+
+      // x labels
+      ctx.fillStyle = "rgba(35,35,35,.75)";
+      ctx.font = "12px ui-sans-serif";
+      const labels = [-3,-2,-1,0,1,2,3];
+      labels.forEach(v=>{
+        const x = zx(v);
+        const txt = (v===0) ? "Median" : (v>0? `+${v} SD` : `${v} SD`);
+        ctx.textAlign = "center";
+        ctx.fillText(txt, x, H-16);
+      });
+
+      // point
+      const px = zx(z);
+      const py = y0 + h*0.55; // we only show position on x-axis (not a full growth curve)
+      ctx.beginPath();
+      ctx.fillStyle = "rgba(255,165,0,.95)";
+      ctx.arc(px, py, 9, 0, Math.PI*2);
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255,255,255,.9)";
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      // small annotation
+      ctx.fillStyle = "rgba(35,35,35,.70)";
+      ctx.font = "13px ui-sans-serif";
+      ctx.textAlign = "left";
+      ctx.fillText(`Z: ${z.toFixed(2)}`, x0, y0-2);
+    }
+  </script>
+</body>
+</html>
